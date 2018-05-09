@@ -4,7 +4,7 @@ import './App.css';
 
 import Header from './Header/Header';
 import Compose from './Compose/Compose';
-import Post from './Post/Post'
+import Post from './Post/Post';
 
 class App extends Component {
   constructor() {
@@ -22,7 +22,7 @@ class App extends Component {
   componentDidMount(){
     axios.get('https://practiceapi.devmountain.com/api/posts')
     .then(results=>{
-      // console.log(results);
+      console.log(results);
       this.setState({posts:results.data})
     })
   }
@@ -50,9 +50,12 @@ class App extends Component {
 
           <Compose />
           {
-            posts.map((currPost)=>
-          <Post key={currPost.id} />)
-          }
+            posts.map( post => (
+              <Post key={ post.id }
+                    text={post.text}
+                    date={post.date} />
+            )
+            )}
 
 
 
